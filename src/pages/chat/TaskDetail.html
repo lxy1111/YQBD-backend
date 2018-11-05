@@ -1,0 +1,37 @@
+<ion-header>
+
+    <ion-navbar>        
+    </ion-navbar>      
+  </ion-header>
+
+  <ion-content padding>
+      <ion-icon item-end name="star-outline" style="color: #488aff;
+        font-size: 37px; 
+        margin-left:310px;" >
+      </ion-icon>
+      <ion-badge style="color: white; font-size: 15px;" item-end>
+        {{ task.state }}
+      </ion-badge>                                            
+      <ion-title style="text-align: center;
+      margin-top: 10px; 
+      margin-bottom: 22.4px;
+      font-weight: 600;
+      font-size: 2.3px;
+      color: rgb(199, 43, 43);
+      pointer-events: auto;">
+          {{task.title}} 
+        </ion-title>
+    <img [src]="task.imageUrl"> 
+    <ion-item>地点：{{ task.location }}</ion-item> 
+    <ion-item>任务类别：{{ types[task.typeId-1].title }}</ion-item> 
+    <ion-item>{{ task.ddl }}</ion-item>
+    <ion-item>人数限制：{{ task.volunteerNum }}</ion-item>
+    <ion-item>
+      报酬：{{ task.pay }}
+      
+    </ion-item>
+    <p style="margin-left:20px ; margin-right:20px; font-size: 1.5rem; line-height: 20px;">详细信息：</p>
+      <p style="margin-left:20px ; margin-right:20px; font-size: 1.5rem; line-height: 20px; color: #807d7d;">{{ task.detail }}</p>
+      <button style="margin-left: 230px;" ion-button outline>我要报名</button>  
+  
+    </ion-content>

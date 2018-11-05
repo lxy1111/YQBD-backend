@@ -1,0 +1,47 @@
+<ion-header>
+     <ion-navbar>
+         <ion-title>
+             发布任务
+         </ion-title>
+     </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+        <ion-list>
+
+            <ion-item>
+              <ion-label style="font-size: 1.6rem;" fixed>任务名称</ion-label>
+              <ion-input type="text" [(ngModel)]="missionname"  required></ion-input>
+            </ion-item>
+          
+            <ion-item>
+              <ion-label style="font-size: 1.6rem;" fixed>任务类别</ion-label>
+              <ion-input type="text" [(ngModel)]="category"></ion-input>
+            </ion-item>
+          
+            <ion-item>
+                <ion-label style="font-size: 1.6rem;" fixed>任务地址</ion-label>
+                <ion-input type="text" [(ngModel)]="missionaddress"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label style="font-size: 1.6rem;" fixed>最大人数</ion-label>
+                  <ion-input type="text" [(ngModel)]="maxnumber" ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="font-size: 1.6rem;" fixed>截止时间</ion-label>
+                    <ion-datetime displayFormat="YYYY MM DD h:mm" type="text" [(ngModel)]="missiondeadline"></ion-datetime>
+                  </ion-item>
+
+                  <ion-item>
+                        <ion-label style="font-size: 1.6rem;" fixed>任务描述</ion-label>
+                       <textarea [(ngModel)]="description"></textarea>
+                      </ion-item>
+          </ion-list>
+        
+          
+          <button ion-button block (click)="addTask(missionname,missionaddress,missiondeadline,category,maxnumber,description)">发  布</button>
+
+</ion-content>
