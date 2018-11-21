@@ -25,16 +25,16 @@
       <div>
         <ion-list style="margin-top: 60px; margin-left: -15px;">
            
-            <ng-container *ngFor="let task of myTask">
-                <ion-item *ngIf="task.typeId==typeIndex" (click)="openTaskDetailPage(task)">
+            <ng-container *ngFor="let task of allTasks">
+                <ion-item *ngIf="task.categoryId==typeIndex" (click)="openTaskDetailPage(task)">
                 
                   <ion-thumbnail  style="width: 80px; height: 80px;" item-start>
-                  <img style="width: 80px; height: 80px;"  [src]="task.imageUrl">
+                  <img style="width: 80px; height: 80px;"  [src]="'assets/imgs/1.jpg'">
                   </ion-thumbnail>
-                  <h2 style="color: black;">{{task.title}}</h2>
-                  <p>{{task.location}}</p>
-                  <p>{{task.ddl}}</p>
-                  <ion-note style="color: #f70a0a;">{{task.pay}}</ion-note>
+                  <h2 style="color: black;">{{task.missionname}}</h2>
+                  <p>{{task.missionaddress}}</p>
+                  <p>{{task.missiondeadline}}</p>
+                  <ion-note style="color: #f70a0a;">{{task.missionpay}}</ion-note>
                   <ion-badge style="margin-left: 120px; color: #fff;">{{task.state}}</ion-badge>
                   
                 </ion-item>

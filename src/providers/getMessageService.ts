@@ -18,6 +18,7 @@ export class GetMessageService {
     return this.http.get(this.BEER_API + '/' + id);
   }
 
+
   sendMessage(message: any): string {
     const url = this.API + '/' + 'receiveMessage';
     const headers = new Headers({ 'Aceept': 'application/json', 'Content-Type' : 'application/x-www-form-urlencoded' });

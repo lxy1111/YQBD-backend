@@ -18,8 +18,11 @@
       <ion-segment-button value="我的信息">
         我的信息
       </ion-segment-button>
-      <ion-segment-button value="我的任务">
-        我的任务
+      <ion-segment-button value="我的申请">
+        我的申请
+      </ion-segment-button>
+      <ion-segment-button value="我的发布">
+        我的发布
       </ion-segment-button>
       <ion-segment-button value="我的收藏">
         我的收藏
@@ -38,30 +41,45 @@
       <ion-item>星级：{{ myInfos.star }}</ion-item>
       <ion-item>等级：{{ myInfos.title }}</ion-item>
     </ion-list>
+
+
+    <ion-list *ngSwitchCase="'我的申请'">
+      <ion-item *ngFor="let task of myAppliedTask" (click)="openTaskDetailPage(task)">
+        <ion-thumbnail item-start>
+          <img [src]="'assets/imgs/1.jpg'">
+        </ion-thumbnail>
+        <h2>{{task.missionname}}</h2>
+        <p>{{task.missionaddress}}</p>
+        <p>{{task.missiondeadline}}</p>
+        <ion-note>{{task.missionpay}}</ion-note>
+        <ion-badge style="margin-left: 140px">{{task.state}}</ion-badge>
+      </ion-item>
+    </ion-list>
+
   
-    <ion-list *ngSwitchCase="'我的任务'">
+    <ion-list *ngSwitchCase="'我的发布'">
       <ion-item *ngFor="let task of myTask" (click)="openTaskDetailPage(task)">
         <ion-thumbnail item-start>
-          <img [src]="task.imageUrl">
+          <img [src]="'assets/imgs/1.jpg'">
         </ion-thumbnail>
-        <h2>{{task.title}}</h2>
-        <p>{{task.location}}</p>
-        <p>{{task.ddl}}</p>
-        <ion-note>{{task.pay}}</ion-note>
+        <h2>{{task.missionname}}</h2>
+        <p>{{task.missionaddress}}</p>
+        <p>{{task.missiondeadline}}</p>
+        <ion-note>{{task.missionpay}}</ion-note>
         <ion-badge style="margin-left: 140px">{{task.state}}</ion-badge>
       </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase="'我的收藏'">
-      <ion-item *ngFor="let task of myTask" (click)="openTaskDetailPage(task)">
+      <ion-item *ngFor="let task of myCollectedTasks" (click)="openTaskDetailPage(task)">
         <ion-thumbnail item-start>
-          <img [src]="task.imageUrl">
+          <img [src]="'assets/imgs/1.jpg'">
         </ion-thumbnail>
-        <h2>{{task.title}}</h2>
-        <p>{{task.location}}</p>
-        <p>{{task.ddl}}</p>
+        <h2>{{task.missionname}}</h2>
+        <p>{{task.missionaddress}}</p>
+        <p>{{task.missiondeadline}}</p>
         <ion-note>
-          {{task.pay}}
+          {{task.missionpay}}
           <ion-badge style="margin-left: 140px">{{task.state}}</ion-badge>
         </ion-note>
         

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestOptions, Headers, Http, Response } from '@angular/http';
 @Injectable()
-export class userService {
-  public API = 'http://localhost:8080/users';
+export class groupService {
+  public API = 'http://localhost:8080/group';
   public BEER_API = this.API + '/login';
    public responsemessage;
   public sendmessage;
@@ -19,8 +19,6 @@ export class userService {
     return this.sendmessage;
   }
 
-
-
   getMessage(): Observable<any> {
     console.log("getmessage.")
     return this.http.get(this.API + '/getMessage');
@@ -30,20 +28,31 @@ export class userService {
     return this.http.get(this.BEER_API + '/' + id);
   }
 
-  login(message: any){
-    return this.handlemessage(message,'login');
+
+
+  getMyGroups(message: any){
+return this.handlemessage(message,'getallmygroups');
   }
 
-  register(message: any){
-    return this.handlemessage(message,'register');
+  getJoinedGroups(message: any){
+    return this.handlemessage(message,'getjoinedgroups');
+      }
+
+  getApplicants(message:any)
+  {
+    return this.handlemessage(message,'getapplicants')
+  }
+  addMember(message:any)
+  {
+    return this.handlemessage(message,'addnewmemberofgroup');
+  }
+
+
+  addGroup(message: any){
+    return this.handlemessage(message,'creategroup');
   }
 
   remove(id: string) {
     return this.http.delete(this.BEER_API + '/' + id);
-  }
-
-  getGroupMembers(message:any)
-  {
-    return this.handlemessage(message,'getmembersofgroup');
   }
 }

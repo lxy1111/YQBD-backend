@@ -22,6 +22,11 @@ export class LoginPage {
 
   public login(phone,password)
   {
+    if(!phone||!password)
+    {
+     this.showAlert();
+     return;
+    }
      var user={
        "phone":phone,
        "pwd":password
@@ -31,15 +36,13 @@ export class LoginPage {
      //  console.log(JSON.stringify(user));
      //this.userService.sendMessage(JSON.stringify(user));
      
-     var responseMessage=this.userService.sendMessage(JSON.stringify(user));
+     var responseMessage=this.userService.login(JSON.stringify(user));
      responseMessage.subscribe( response => {
      // console.log(response["_body"]);
       //console.log(JSON.parse(response._body));
        if(response["_body"]){
-         console.log(response._body);
          console.log(typeof(response["_body"]));     
         this.ans=response["_body"];
-        this.ans=this.ans.substring(1,this.ans.length-1);
         console.log(this.ans);
          this.userInfo=JSON.parse(this.ans);
             console.log(this.userInfo['user_id']);
@@ -56,7 +59,7 @@ export class LoginPage {
     showAlert() {
       const alert = this.alertCtrl.create({
         title: '错误提示',
-        subTitle: '用户名或者密码有误！',
+        subTitle: '用户名或密码有误',
         buttons: ['确认']
       });
       alert.present();

@@ -5,12 +5,12 @@
   </ion-header>
 
   <ion-content padding>
-      <ion-icon item-end name="star-outline" style="color: #488aff;
+      <ion-icon (click)="collectTasks()" item-end name="star-outline" style="color: #488aff;
         font-size: 37px; 
         margin-left:310px;" >
       </ion-icon>
       <ion-badge style="color: white; font-size: 15px;" item-end>
-        {{ task.state }}
+        {{task.state}}
       </ion-badge>                                            
       <ion-title style="text-align: center;
       margin-top: 10px; 
@@ -19,19 +19,25 @@
       font-size: 2.3px;
       color: rgb(199, 43, 43);
       pointer-events: auto;">
-          {{task.title}} 
+          {{task.missionname}} 
         </ion-title>
-    <img [src]="task.imageUrl"> 
-    <ion-item>地点：{{ task.location }}</ion-item> 
-    <ion-item>任务类别：{{ types[task.typeId-1].title }}</ion-item> 
-    <ion-item>{{ task.ddl }}</ion-item>
-    <ion-item>人数限制：{{ task.volunteerNum }}</ion-item>
+    <img [src]="'assets/imgs/1.jpg'"> 
+    <ion-item>地点：{{ task.missionaddress }}</ion-item> 
+    <ion-item>任务类别：{{task.category}}</ion-item> 
+    <ion-item>截止时间：{{ task.missiondeadline }}</ion-item>
+    <ion-item>人数限制：{{ task.maxNumber }}</ion-item>
     <ion-item>
-      报酬：{{ task.pay }}
-      
+      报酬：{{ task.missionpay }}
+    </ion-item>
+    <ion-item>
+      发布者姓名：{{ task.publishername }}
+    </ion-item>
+    <ion-item>
+      发布者联系方式：{{ task.publisherphone }}
     </ion-item>
     <p style="margin-left:20px ; margin-right:20px; font-size: 1.5rem; line-height: 20px;">详细信息：</p>
-      <p style="margin-left:20px ; margin-right:20px; font-size: 1.5rem; line-height: 20px; color: #807d7d;">{{ task.detail }}</p>
-      <button style="margin-left: 230px;" ion-button outline>我要报名</button>  
+      <p style="margin-left:20px ; margin-right:20px; font-size: 1.5rem; line-height: 20px; color: #807d7d;">{{ task.description }}</p>
+      <button *ngIf="!ispublisher" style="margin-left: 230px;"  (click)="openEntryForm(task)" ion-button outline>我要报名</button>  
+      <button *ngIf="ispublisher" style="margin-left: 230px;"  (click)="viewApplicants(task)" ion-button outline>查看申请人</button>  
   
     </ion-content>

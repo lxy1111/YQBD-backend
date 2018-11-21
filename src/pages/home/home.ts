@@ -7,6 +7,7 @@ import { mockMyProfile } from '../../mockData/mockMyProfile';
 import { mockSlides } from '../../mockData/mockSlides';
 import { mockTypes } from '../../mockData/mockTypes';
 import { AddTaskPage } from '../addTasks/addTasks';
+import { missionService} from '../../providers/missionService';
 
 @Component({
   templateUrl: 'taskType.html',
@@ -17,17 +18,46 @@ export class taskTypePage {
 
 //@ViewChild(Content) content: Content;
 myTask = mockTasks;
-myInfo = mockMyProfile;
+myInfo;
 types = mockTypes;
 typeIndex : any;
+ans;
+allTasks;
 constructor(public navCtrl: NavController, 
             public navParams: NavParams,
+            public missionService: missionService,
             public formBuilder: FormBuilder) {
                 this.typeIndex=navParams.data.typeIndex;
+                this.myInfo=navParams.data.myInfo;
+                this.getAllTasks();
+            }
+
+            getAllTasks()
+            {
+              var message={
+                "gettasks":1
+              };
+              var data = JSON.stringify(message);
+              console.log(data);
+              var jsonObj = JSON.parse(data);//转换为json对象
+               console.log(jsonObj);
+             var responseMessage= this.missionService.getAllMissions(JSON.stringify(message));
+             responseMessage.subscribe( response => {
+                  console.log(response["_body"]);    
+                  this.ans=response["_body"];
+                  console.log(this.ans);
+                this.allTasks=JSON.parse(this.ans);
+                for(var i=0;i<this.allTasks.length;i++){
+                  console.log(this.allTasks[i]); //取json中的值
+                  }
+                 // var jsonobj=JSON.parse(this.ans);
+        
+               // console.log(jsonobj);
+              });
             }
 
             openTaskDetailPage(task) {
-              this.navCtrl.push(TaskDetailPage, { task: task });
+              this.navCtrl.push(TaskDetailPage, { task: task,myInfo:this.myInfo });
             }
 
 }
@@ -37,9 +67,14 @@ constructor(public navCtrl: NavController,
   template: `<ion-header>
   <ion-navbar>
     <ion-title>首页</ion-title>
-    <button (click)="openAddTaskPage()">
-  <ion-icon name="add"></ion-icon>
-</button>
+    <button style="background-color: #f8f8f8; 
+    margin-left: 320px; 
+    font-weight: bolder;
+    color: #488aff;
+    font-size: 3.0rem;
+    " (click)="openAddTaskPage()">
+    <ion-icon name="add-circle"></ion-icon>
+  </button>
   </ion-navbar>
   
 </ion-header>
@@ -175,14 +210,14 @@ constructor(public navCtrl: NavController,
       </ion-list>
       
       <ion-list *ngSwitchCase="'全部任务'">
-          <ion-item *ngFor="let task of myTask" (click)="openTaskDetailPage(task)">
+          <ion-item *ngFor="let task of allTasks" (click)="openTaskDetailPage(task)">
               <ion-thumbnail style="width: 80px; height: 80px;" item-start>
-                <img style="width: 80px; height: 80px;"  [src]="task.imageUrl">
+                <img style="width: 80px; height: 80px;"  [src]="'assets/imgs/1.jpg'">
               </ion-thumbnail>
-              <h2 style="color: black;">{{task.title}}</h2>
-              <p>{{task.location}}</p>
-              <p>{{task.ddl}}</p>
-              <ion-note style="color: #f70a0a;">{{task.pay}}</ion-note>
+              <h2 style="color: black;">{{task.missionname}}</h2>
+              <p>{{task.missionaddress}}</p>
+              <p>{{task.missiondeadline}}</p>
+              <ion-note style="color: #f70a0a;">{{task.missionpay}}</ion-note>
               <ion-badge style="margin-left: 120px; color: #fff;">{{task.state}}</ion-badge>
             </ion-item>
       </ion-list>
@@ -203,33 +238,72 @@ export class HomePage {
 
   public AboutTask : string = '全部任务';
 
-  myInfos = mockMyProfile;
+  myInfos;
   myTask = mockTasks;
   slides = mockSlides;
   types = [];
+  allTasks;
+  ans:string;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
+    public missionService: missionService,
     public nav: NavController) {
-        this.types= mockTypes;
+      this.myInfos=navParams;  
+      this.types= mockTypes;
+      this.getAllTasks();
+      
+     
     }
 
+    getAllTasks()
+    {
+      var message={
+        "gettasks":1
+      };
+      var data = JSON.stringify(message);
+      console.log(data);
+      var jsonObj = JSON.parse(data);//转换为json对象
+       console.log(jsonObj);
+
+
+
+     var responseMessage= this.missionService.getAllMissions(JSON.stringify(message));
+     responseMessage.subscribe( response => {
+          console.log(response["_body"]);    
+          this.ans=response["_body"];
+          console.log(this.ans);
+        this.allTasks=JSON.parse(this.ans);
+        for(var i=0;i<this.allTasks.length;i++){
+          console.log(this.allTasks[i]); //取json中的值
+          }
+         // var jsonobj=JSON.parse(this.ans);
+
+       // console.log(jsonobj);
+      });
+    }
+
+    ionViewWillEnter()
+    {
+      this.getAllTasks();
+    }
+  
     ionViewDidLoad() {
       console.log('ionViewDidLoad homePage');
     }
 
   openTaskDetailPage(task) {
-    this.navCtrl.push(TaskDetailPage, { task: task });
+    this.navCtrl.push(TaskDetailPage, { task: task,myInfo: this.myInfos });
   }
 
   openTaskCatalog(typeIndex) {
-
     console.log("The typeIndex : "+typeIndex);
-    this.navCtrl.push(taskTypePage,{typeIndex:typeIndex});
+
+    this.navCtrl.push(taskTypePage,{typeIndex:typeIndex,myInfo:this.myInfos});
   }
 
   openAddTaskPage(){
-    this.navCtrl.push(AddTaskPage);
+    this.navCtrl.push(AddTaskPage,this.myInfos);
   }
 
 }

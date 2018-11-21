@@ -20,6 +20,14 @@ import { HttpModule } from '@angular/http';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/login/register';
 import { userService } from '../providers/userService';
+import { missionService } from '../providers/missionService';
+import { EntryFormPage } from '../pages/entryForm/entryForm';
+import { GroupsPage } from '../pages/groups/groups';
+import { GroupDetailsPage } from '../pages/groups/groupDetails';
+import { AddGroupPage } from '../pages/groups/AddGroup';
+import { groupService } from '../providers/groupService';
+import { ApplicantPage } from '../pages/chat/applicants';
+import { ApplicantDetailPage } from '../pages/chat/applicantDetail';
 
 @NgModule({
   declarations: [
@@ -33,7 +41,13 @@ import { userService } from '../providers/userService';
     LoginPage,
     taskTypePage,
     RegisterPage,
-    AddTaskPage
+    AddTaskPage,
+    EntryFormPage,
+    GroupsPage,
+    GroupDetailsPage,
+    AddGroupPage,
+    ApplicantPage,
+    ApplicantDetailPage
   ],
   imports: [
     BrowserModule,
@@ -53,13 +67,21 @@ import { userService } from '../providers/userService';
     LoginPage,
     taskTypePage,
     RegisterPage,
-    AddTaskPage
+    AddTaskPage,
+    EntryFormPage,
+    GroupDetailsPage,
+    GroupsPage,
+    AddGroupPage,
+    ApplicantPage,
+    ApplicantDetailPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     GetMessageService,
     userService,
+    missionService,
+    groupService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
