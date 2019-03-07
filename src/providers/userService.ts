@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { RequestOptions, Headers, Http, Response } from '@angular/http';
 @Injectable()
 export class userService {
-  public API = 'http://localhost:8080/users';
+  public API = 'http://101.132.117.17:8080/users';
   public BEER_API = this.API + '/login';
    public responsemessage;
   public sendmessage;

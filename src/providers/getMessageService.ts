@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { RequestOptions, Headers, Http, Response } from '@angular/http';
 @Injectable()
 export class GetMessageService {
-  public API = 'http://localhost:8080';
+  public API = 'http://101.132.117.17:8080';
   public BEER_API = this.API + '/getMessage';
   public responsemessage;
   constructor(public http: Http) {

@@ -4,6 +4,7 @@ import { ItemDetailsPage } from '../item-details/item-details';
 import { mockTasks } from '../../mockData/mockTasks';
 import { TaskDetailPage } from '../chat/chat';
 import { missionService } from '../../providers/missionService';
+import { ImgService } from '../../providers/ImgService';
 @Component({ 
   selector: 'page-contact',
   templateUrl: 'Contact.html',
@@ -20,6 +21,8 @@ export class ContactPage {
 
   constructor(public navCtrl: NavController,
               public navparams:NavParams,
+              public imgSer:ImgService,
+            
               public missionService:missionService) {
     this.params=navparams;
     console.log(this.params);
@@ -55,7 +58,26 @@ export class ContactPage {
     this.getMyAppliedMissions();
     this.getMyCollectedTasks();
   }
+  // private initImgSer() {
+  //   this.imgSer.uploadApi = '.....';
+  //   this.imgSer.upload.success= (data)=> {
+  //   this.doctorData.avatar = data.data.url;
+  //   };
+  //   this.imgSer.upload.error= (err)=> {
+  //   this.toastSer.showToast('上传失败');
+  //   };
+  //   }
+    
+    avatarChoice() {
+    //this.initImgSer();
+    this.imgSer.showPicActionSheet();
+    }
+  
 
+  changeheadimage()
+  {
+    this.imgSer.showPicActionSheet();
+  }
    
 
   getMyAppliedMissions()

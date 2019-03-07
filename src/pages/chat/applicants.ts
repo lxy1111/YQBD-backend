@@ -25,6 +25,7 @@ applicants;
     this.getApplicants();
     console.log('ionViewDidLoad GroupsPage');
   }
+  
   ionViewWillEnter()
   {
     this.getApplicants();

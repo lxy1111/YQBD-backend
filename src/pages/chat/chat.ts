@@ -17,9 +17,9 @@ export class TaskDetailPage {
 //@ViewChild(Content) content: Content;
 task;
 ans;
-myInfo;
+myInfo;     
 types = mockTypes;
-applicants;
+applicants;  
 ispublisher;
 constructor(public navCtrl: NavController, 
             public navParams: NavParams,

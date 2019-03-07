@@ -28,6 +28,13 @@ import { AddGroupPage } from '../pages/groups/AddGroup';
 import { groupService } from '../providers/groupService';
 import { ApplicantPage } from '../pages/chat/applicants';
 import { ApplicantDetailPage } from '../pages/chat/applicantDetail';
+import { ImagePicker,ImagePickerOptions } from '@ionic-native/image-picker';
+import { FileTransfer, FileUploadOptions, FileTransferObject }from'@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
+import { ImgService } from '../providers/ImgService';
+import { ToastService } from '../providers/ToastService';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +65,7 @@ import { ApplicantDetailPage } from '../pages/chat/applicantDetail';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-     ChatPage,
+    ChatPage,
     ContactPage,
     HomePage,
     TabsPage,
@@ -82,6 +89,13 @@ import { ApplicantDetailPage } from '../pages/chat/applicantDetail';
     userService,
     missionService,
     groupService,
+   ImagePicker,
+   ImgService,
+   ToastService,
+   Camera,
+    File,
+   FileTransferObject,
+   FileTransfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
